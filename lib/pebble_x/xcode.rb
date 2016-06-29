@@ -9,7 +9,7 @@ module PebbleX
       @pebblex_cmd = environment.pebblex_cmd
       @pebble_sdk_dir = environment.pebble_sdk_dir
 
-      unless File.exists?(File.join(@directory, 'appinfo.json'))
+      unless File.exists?(File.join(@directory, 'package.json'))
         raise ArgumentError, "The directory '#{@directory}' does not contain a Pebble project."
       end
     end
@@ -54,7 +54,7 @@ module PebbleX
       end
 
       project.main_group.new_reference('resources') if File.directory?('resources')
-      project.main_group.new_file('appinfo.json')
+      project.main_group.new_file('package.json')
 
       # clean up xcode project ('products' group must remain due to fake iOS target)
       project.frameworks_group.remove_from_project

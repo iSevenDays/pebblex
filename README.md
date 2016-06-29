@@ -30,9 +30,15 @@ you can easily create an Xcode project file
     pebblex xcode
     open hello_world.xcodeproj
 
+Contents of Pebble SDK's folder pebble-sdk-4.4-dp2-mac should be in Users/YOUR_USERNAME/Cellar/pebble-sdk/4.3
+
 As part of the project file, `pebblex xcode` will create a target "Pebble" that builds your project right from the IDE. After each build, all warnings and errors will be propagated back right into your editor.
 
-Lucky [AppCode][AppCode] (and now Xcode6-beta) users: `pebblex` automatically creates a run configuration to build, deploy and look at the logs directly from the IDE! Make sure to set `PEBBLE_PHONE` before you push the play button.
+Lucky [AppCode][AppCode] users: `pebblex` automatically creates a run configuration to build, deploy and look at the logs directly from the IDE! Make sure to set `PEBBLE_PHONE` before you push the play button.
+
+To make installation to Pebble automated that on Xcode7, you can edit run scheme of Xcode project's Pebble target to have post-action like this:
+cd /Users/YOUR_USERNAME/pebble_xcode/ && pebble install --phone YOUR_PHONES_IP_ADDRESS
+
 
 ## Contributing
 
