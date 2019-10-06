@@ -16,9 +16,13 @@ With [AppCode][AppCode] (or the latest Xcode6-Beta) you can even build, install 
 
 Install the Ruby Gem:
     cd ~/Downloads
+
     git clone git@github.com:iSevenDays/pebblex.git
+
     cd pebblex
+
     gem build pebblex.gemspec
+    
     [sudo] gem install pebblex-0.0.8.gem
 
 ## Usage
