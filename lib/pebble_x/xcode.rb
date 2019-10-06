@@ -27,7 +27,9 @@ module PebbleX
       project = Xcodeproj::Project.new(project_filename)
 
       # will add pebble sdk headers and build/src/resource_ids.auto.h to search path
-      project.build_configuration_list.set_setting('HEADER_SEARCH_PATHS', [File.join(@pebble_sdk_dir, 'Pebble/include'), 'build'])
+      pebble_include_dir = `pebble sdk include-path basalt` # We will use this only for auto-completion
+      pebble_include_dir = pebble_include_dir.gsub(/ /, '\ ')
+      project.build_configuration_list.set_setting('HEADER_SEARCH_PATHS', pebble_include_dir)
 
       legacy_target = project.new(Xcodeproj::Project::Object::PBXLegacyTarget)
       legacy_target.name = 'Pebble'
