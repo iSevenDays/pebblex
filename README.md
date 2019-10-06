@@ -22,7 +22,7 @@ Install the Ruby Gem:
     cd pebblex
 
     gem build pebblex.gemspec
-    
+
     [sudo] gem install pebblex-0.0.8.gem
 
 ## Usage
@@ -44,8 +44,14 @@ As part of the project file, `pebblex xcode` will create a target "Pebble" that 
 
 Lucky [AppCode][AppCode] users: `pebblex` automatically creates a run configuration to build, deploy and look at the logs directly from the IDE! Make sure to set `PEBBLE_PHONE` before you push the play button.
 
-To make installation to Pebble automated that on Xcode7, you can edit run scheme of Xcode project's Pebble target to have post-action like this:
-cd YOUR_PROJECT_DIRECTORY && pebble install --phone YOUR_PHONES_IP_ADDRESS
+To make installation to Pebble automated on Xcode 11:
+1. Open project in Xcode
+2. Select Pebble scheme and click 'Edit Scheme...'
+3. Select "Run" from the left sidebar menu
+4. Select "Arguments"
+5. Click "+" button at the "Environment Variables" section
+6. Add new variable PHONE 192.168.1.1
+(IP of your Pebble Watch you can see in Pebble iOS App -> Settings -> Developer -> Listening on)
 
 
 ## Contributing
