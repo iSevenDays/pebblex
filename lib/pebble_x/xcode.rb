@@ -46,6 +46,7 @@ module PebbleX
       group = project.main_group.new_group("sources", "src")
 
       Dir.glob('src/**/*.{c,h,js}').each do |f|
+        f = f.sub('src/','') # remove double /src/src from path
         file = group.new_file(f)
         puts "adding file #{f}" if @verbose
         if File.extname(f) == '.c'
@@ -62,20 +63,21 @@ module PebbleX
       # run configuration for Pebble target
       scheme = Xcodeproj::XCScheme.new
       scheme.add_build_target legacy_target
+      
       launch_action = scheme.instance_variable_get :@launch_action
-      launch_action.attributes["useCustomWorkingDirectory"] = "YES"
-      launch_action.attributes["customWorkingDirectory"] = @directory
-      launch_action.attributes["selectedDebuggerIdentifier"] = ""
-      launch_action.attributes["selectedLauncherIdentifier"] = "Xcode.IDEFoundation.Launcher.PosixSpawn"
-      path_runnable = launch_action.add_element "PathRunnable"
+      launch_action.xml_element.attributes["useCustomWorkingDirectory"] = "YES"
+      launch_action.xml_element.attributes["customWorkingDirectory"] = @directory
+      launch_action.xml_element.attributes["selectedDebuggerIdentifier"] = ""
+      launch_action.xml_element.attributes["selectedLauncherIdentifier"] = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      path_runnable = launch_action.xml_element.add_element "PathRunnable"
       path_runnable.attributes["FilePath"] = @pebblex_cmd
-      command_line_arguments = launch_action.add_element "CommandLineArguments"
+      command_line_arguments = launch_action.xml_element.add_element "CommandLineArguments"
       command_line_argument = command_line_arguments.add_element "CommandLineArgument"
       command_line_argument.attributes["argument"] = "debug --pebble_sdk=#{@pebble_sdk_dir}"
       command_line_argument.attributes["isEnabled"] = "YES"
       # remove unneeded elements
       for s in [:@test_action, :@profile_action].each do
-        scheme.doc.elements[1].delete_element(scheme.instance_variable_get s)
+        #scheme.doc.elements[1].delete_element(scheme.instance_variable_get s)
       end
       scheme.save_as(project.path, legacy_target.name, false)
 

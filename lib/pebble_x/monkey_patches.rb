@@ -29,7 +29,7 @@ class Xcodeproj::XCScheme::XML_Fromatter
 end
 
 
-class Xcodeproj::XCScheme
+class Xcodeproj::XCScheme::BuildableReference
   alias construct_buildable_name_without_legacy_target construct_buildable_name
 
   def construct_buildable_name_with_legacy_target(build_target)
