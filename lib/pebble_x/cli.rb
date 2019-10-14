@@ -32,7 +32,7 @@ module PebbleX
     end
 
     desc "clean", "Cleans pebble project"
-    def build
+    def clean
       pebble = command_helper PebbleX::Pebble
       exit(pebble.clean)
     end
