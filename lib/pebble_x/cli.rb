@@ -31,6 +31,12 @@ module PebbleX
       exit(pebble.build)
     end
 
+    desc "clean", "Cleans pebble project"
+    def build
+      pebble = command_helper PebbleX::Pebble
+      exit(pebble.clean)
+    end
+
     desc "debug", "Loads PBW and logs output from connected watch"
     option :phone
     option :pebble_id
