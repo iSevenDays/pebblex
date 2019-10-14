@@ -57,6 +57,10 @@ module PebbleX
       pebble_call('build')
     end
 
+    def clean
+      pebble_call('clean')
+    end
+
     def install
       pebble_call('install', true)
     end
