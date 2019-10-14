@@ -1,3 +1,4 @@
+#encoding: utf-8
 module PebbleX
   class Pebble
 
@@ -14,10 +15,12 @@ module PebbleX
     end
 
     def process_sys_call_line(line)
-      return line unless line
-      line.gsub %r{^(.*?)(:\d+:(\d+:)? (warning|error):)} do |full_match,foo|
-        File.expand_path($1, File.join(pwd, 'build')) + $2
-      end
+      return line
+      # puts line
+      # return line unless line
+      # line.scrub.gsub %r{^(.*?)(:\d+:(\d+:)? (warning|error):)} do |full_match,foo|
+      #   File.expand_path($1, File.join(pwd, 'build')) + $2
+      # end
     end
 
     def sys_call(call)
