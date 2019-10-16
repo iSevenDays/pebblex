@@ -15,12 +15,16 @@ module PebbleX
     end
 
     def process_sys_call_line(line)
-      return line
-      # puts line
-      # return line unless line
-      # line.scrub.gsub %r{^(.*?)(:\d+:(\d+:)? (warning|error):)} do |full_match,foo|
-      #   File.expand_path($1, File.join(pwd, 'build')) + $2
-      # end
+      begin
+        # Required for Xcode live issues highlighting
+        return line unless line
+        line.gsub %r{^(.*?)(:\d+:(\d+:)? (warning|error):)} do |full_match,foo|
+          File.expand_path($1, File.join(pwd, 'build')) + $2
+        end
+      rescue
+        # return line in case it is a debug UTF-8 output from pebble logs
+        return line
+      end  
     end
 
     def sys_call(call)
